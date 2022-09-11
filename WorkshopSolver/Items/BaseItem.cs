@@ -1,7 +1,7 @@
 ﻿using ImGuiScene;
 using Lumina.Excel.GeneratedSheets;
 
-namespace ReSanctuary;
+namespace WorkshopSolver;
 
 public abstract class BaseItem {
     public string Name;

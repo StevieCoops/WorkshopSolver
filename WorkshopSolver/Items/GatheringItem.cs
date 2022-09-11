@@ -2,7 +2,7 @@
 using Lumina.Excel;
 using Lumina.Excel.GeneratedSheets;
 
-namespace ReSanctuary;
+namespace WorkshopSolver;
 
 public class GatheringItem : BaseItem {
     public Item? RequiredTool;

@@ -4,7 +4,7 @@ using Dalamud.Interface;
 using Dalamud.Interface.Windowing;
 using ImGuiNET;
 
-namespace ReSanctuary.Windows;
+namespace WorkshopSolver.Windows;
 
 public class ConfigWindow : Window, IDisposable {
     private Configuration Configuration;
@@ -13,7 +13,7 @@ public class ConfigWindow : Window, IDisposable {
                                                  ImGuiWindowFlags.NoScrollbar |
                                                  ImGuiWindowFlags.NoScrollWithMouse;
 
-    public ConfigWindow(Plugin plugin) : base("ReSanctuary Config", WindowFlags) {
+    public ConfigWindow(Plugin plugin) : base("WorkshopSolver Config", WindowFlags) {
         Size = new Vector2(300, 75) * ImGuiHelpers.GlobalScale;
         SizeCondition = ImGuiCond.Always;
 

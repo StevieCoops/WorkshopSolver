@@ -5,12 +5,12 @@ using Dalamud.Game.Command;
 using Dalamud.IoC;
 using Dalamud.Plugin;
 using Dalamud.Interface.Windowing;
-using ReSanctuary.Windows;
+using WorkshopSolver.Windows;
 
-namespace ReSanctuary;
+namespace WorkshopSolver;
 
 public sealed class Plugin : IDalamudPlugin {
-    public string Name => "ReSanctuary";
+    public string Name => "WorkshopSolver";
     private const string CommandName = "/psanctuary";
 
     [PluginService] public static DalamudPluginInterface PluginInterface { get; private set; }
@@ -19,7 +19,7 @@ public sealed class Plugin : IDalamudPlugin {
     [PluginService] public static SigScanner SigScanner { get; private set; }
 
     public Configuration Configuration { get; private set; }
-    public WindowSystem WindowSystem = new("ReSanctuary");
+    public WindowSystem WindowSystem = new("WorkshopSolver");
 
     public Plugin() {
         Configuration = PluginInterface.GetPluginConfig() as Configuration ?? new Configuration();
@@ -30,7 +30,7 @@ public sealed class Plugin : IDalamudPlugin {
         WindowSystem.AddWindow(new WidgetWindow(this));
 
         CommandManager.AddHandler(CommandName, new CommandInfo(OnCommand) {
-            HelpMessage = "Opens the main ReSanctuary interface."
+            HelpMessage = "Opens the main WorkshopSolver interface."
         });
 
         PluginInterface.UiBuilder.Draw += DrawUI;
@@ -49,10 +49,10 @@ public sealed class Plugin : IDalamudPlugin {
                 DrawConfigUI();
                 break;
             case "widget":
-                WindowSystem.GetWindow("ReSanctuary Widget").IsOpen = true;
+                WindowSystem.GetWindow("WorkshopSolver Widget").IsOpen = true;
                 break;
             default:
-                WindowSystem.GetWindow("ReSanctuary").IsOpen = true;
+                WindowSystem.GetWindow("WorkshopSolver").IsOpen = true;
                 break;
         }
     }
@@ -62,6 +62,6 @@ public sealed class Plugin : IDalamudPlugin {
     }
 
     public void DrawConfigUI() {
-        WindowSystem.GetWindow("ReSanctuary Config").IsOpen = true;
+        WindowSystem.GetWindow("WorkshopSolver Config").IsOpen = true;
     }
 }

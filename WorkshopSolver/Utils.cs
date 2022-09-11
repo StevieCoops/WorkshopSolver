@@ -5,7 +5,7 @@ using FFXIVClientStructs.FFXIV.Client.UI.Agent;
 using Lumina.Excel.GeneratedSheets;
 using MapType = FFXIVClientStructs.FFXIV.Client.UI.Agent.MapType;
 
-namespace ReSanctuary;
+namespace WorkshopSolver;
 
 public static class Utils {
     public static unsafe void OpenGatheringMarker(uint teri, int x, int y, int radius, string name) {

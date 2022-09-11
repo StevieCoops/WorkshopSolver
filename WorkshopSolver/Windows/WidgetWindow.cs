@@ -11,7 +11,7 @@ using ImGuiScene;
 using Lumina.Excel;
 using Lumina.Excel.GeneratedSheets;
 
-namespace ReSanctuary.Windows;
+namespace WorkshopSolver.Windows;
 
 public class WidgetWindow : Window, IDisposable {
     private Plugin Plugin;
@@ -23,7 +23,7 @@ public class WidgetWindow : Window, IDisposable {
 
     private Dictionary<uint, TextureWrap> todoTextureCache;
 
-    public WidgetWindow(Plugin plugin) : base("ReSanctuary Widget") {
+    public WidgetWindow(Plugin plugin) : base("WorkshopSolver Widget") {
         SizeConstraints = new WindowSizeConstraints {
             MinimumSize = new Vector2(150, 75) * ImGuiHelpers.GlobalScale,
             MaximumSize = new Vector2(float.MaxValue, float.MaxValue)

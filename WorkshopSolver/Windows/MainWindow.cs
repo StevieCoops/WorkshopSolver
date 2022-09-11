@@ -11,7 +11,7 @@ using ImGuiScene;
 using Lumina.Excel;
 using Lumina.Excel.GeneratedSheets;
 
-namespace ReSanctuary.Windows;
+namespace WorkshopSolver.Windows;
 
 public class MainWindow : Window, IDisposable {
     private Plugin Plugin;
@@ -28,7 +28,7 @@ public class MainWindow : Window, IDisposable {
 
     private Dictionary<uint, TextureWrap> todoTextureCache;
 
-    public MainWindow(Plugin plugin) : base("ReSanctuary") {
+    public MainWindow(Plugin plugin) : base("WorkshopSolver") {
         SizeConstraints = new WindowSizeConstraints {
             MinimumSize = new Vector2(300, 300) * ImGuiHelpers.GlobalScale,
             MaximumSize = new Vector2(float.MaxValue, float.MaxValue)
@@ -54,7 +54,7 @@ public class MainWindow : Window, IDisposable {
         ImGui.SetNextItemWidth(ImGui.GetContentRegionAvail().X);
         ImGui.InputText(string.Empty, ref gatheringSearchFilter, 256);
 
-        if (ImGui.BeginTable("ReSanctuary_MainWindowTable", 4, tableFlags)) {
+        if (ImGui.BeginTable("WorkshopSolver_MainWindowTable", 4, tableFlags)) {
             ImGui.TableSetupColumn("Icon");
             ImGui.TableSetupColumn("Name");
             ImGui.TableSetupColumn("Buttons");
@@ -76,7 +76,7 @@ public class MainWindow : Window, IDisposable {
                 ImGui.Text(item.Name);
 
                 ImGui.TableSetColumnIndex(2);
-                if (ImGui.Button("Show on map##ReSanctuary_ShowOnMap_" + item.ItemID)) {
+                if (ImGui.Button("Show on map##WorkshopSolver_ShowOnMap_" + item.ItemID)) {
                     var islandSanctuary = territoryTypeSheet.First(x => x.Name == "h1m2");
                     var teri = islandSanctuary.RowId;
 
@@ -87,7 +87,7 @@ public class MainWindow : Window, IDisposable {
                 
                 ImGui.SameLine();
 
-                if (ImGui.Button("Add to todo list##ReSanctuary_GatheringAddTodo_" + item.ItemID)) {
+                if (ImGui.Button("Add to todo list##WorkshopSolver_GatheringAddTodo_" + item.ItemID)) {
                     var rowID = itemPouchSheet.First(x => {
                         var itemValue = x.Item.Value;
                         if (itemValue == null) return false;
@@ -110,12 +110,12 @@ public class MainWindow : Window, IDisposable {
         {
             var imguiSucks = ImGui.CalcTextSize("Isleworks ImGui Sucks Dickballs Lmao").X;
             var childSize = contentRegionAvail with { X = imguiSucks };
-            ImGui.BeginChild("ReSanctuary_WorkshopListSearchChild", childSize);
+            ImGui.BeginChild("WorkshopSolver_WorkshopListSearchChild", childSize);
 
             ImGui.SetNextItemWidth(ImGui.GetContentRegionAvail().X);
             ImGui.InputText(string.Empty, ref workshopSearchFilter, 256);
 
-            if (ImGui.BeginListBox("##ReSanctuary_WorkshopList", ImGui.GetContentRegionAvail())) {
+            if (ImGui.BeginListBox("##WorkshopSolver_WorkshopList", ImGui.GetContentRegionAvail())) {
                 for (var i = 0; i < workshopItems.Count; i++) {
                     var item = workshopItems[i];
 
@@ -136,7 +136,7 @@ public class MainWindow : Window, IDisposable {
         ImGui.SameLine();
 
         {
-            ImGui.BeginChild("ReSanctuary_WorkshopListViewChild");
+            ImGui.BeginChild("WorkshopSolver_WorkshopListViewChild");
 
             var item = workshopItems[workshopSearchSelected];
 
@@ -149,12 +149,12 @@ public class MainWindow : Window, IDisposable {
 
             ImGui.Text($"{item.Name}\nDuration: {item.CraftingTime} hours");
             
-            if (ImGui.Button("Add to todo list##ReSanctuary_WorkshopAddTodo_" + item.ItemID)) {
+            if (ImGui.Button("Add to todo list##WorkshopSolver_WorkshopAddTodo_" + item.ItemID)) {
                 foreach (var (requiredMat, matCount) in item.Materials) {
                     Utils.AddToTodoList(Plugin.Configuration, requiredMat, matCount);
                 }
                 
-                Plugin.WindowSystem.GetWindow("ReSanctuary Widget").IsOpen = true;
+                Plugin.WindowSystem.GetWindow("WorkshopSolver Widget").IsOpen = true;
             }
 
             ImGui.Text("Materials:");
@@ -176,7 +176,7 @@ public class MainWindow : Window, IDisposable {
                         ImGui.SameLine();
                         ImGui.Text($"Required tool: {(mat.RequiredTool != null ? mat.RequiredTool.Name : "None")}");
 
-                        if (ImGui.Button("Show on map##ReSanctuary_WorkshopShowOnMap_" + mat.ItemID)) {
+                        if (ImGui.Button("Show on map##WorkshopSolver_WorkshopShowOnMap_" + mat.ItemID)) {
                             var islandSanctuary = territoryTypeSheet.First(x => x.Name == "h1m2");
                             var teri = islandSanctuary.RowId;
 
@@ -202,7 +202,7 @@ public class MainWindow : Window, IDisposable {
         var todoList = Plugin.Configuration.TodoList;
 
         if (ImGui.Button("Open Todo Widget")) {
-            Plugin.WindowSystem.GetWindow("ReSanctuary Widget").IsOpen = true;
+            Plugin.WindowSystem.GetWindow("WorkshopSolver Widget").IsOpen = true;
         }
 
         foreach (var (id, amount) in todoList) {
@@ -223,7 +223,7 @@ public class MainWindow : Window, IDisposable {
 
             ImGui.PushItemWidth(100 * ImGuiHelpers.GlobalScale);
             ImGui.SameLine();
-            if (ImGui.InputInt($"##ReSanctuary_TodoList_{id}", ref amnt, 1, 2,
+            if (ImGui.InputInt($"##WorkshopSolver_TodoList_{id}", ref amnt, 1, 2,
                     ImGuiInputTextFlags.EnterReturnsTrue)) {
                 if (amnt > 0) {
                     todoList[id] = amnt;
@@ -239,7 +239,7 @@ public class MainWindow : Window, IDisposable {
             ImGui.SameLine();
             ImGui.PushFont(UiBuilder.IconFont);
             var trashIcon = FontAwesomeIcon.Trash.ToIconString();
-            if (ImGui.Button(trashIcon + $"##ReSanctuary_TodoListTrash_{id}")) {
+            if (ImGui.Button(trashIcon + $"##WorkshopSolver_TodoListTrash_{id}")) {
                 todoList.Remove(id);
             }
             ImGui.PopFont();
@@ -250,12 +250,12 @@ public class MainWindow : Window, IDisposable {
     }
 
     private void DrawAboutTab() {
-        ImGui.Text("ReSanctuary, made by NotNite.");
+        ImGui.Text("WorkshopSolver, made by NotNite.");
         ImGui.Text("If you like my work, please consider supporting me financially via GitHub Sponsors!");
 
         if (ImGui.Button("View GitHub Page"))
             Process.Start(new ProcessStartInfo {
-                FileName = "https://github.com/NotNite/ReSanctuary",
+                FileName = "https://github.com/NotNite/WorkshopSolver",
                 UseShellExecute = true
             });
 
@@ -269,7 +269,7 @@ public class MainWindow : Window, IDisposable {
     }
 
     public override void Draw() {
-        if (ImGui.BeginTabBar("##ReSanctuary_MainWindowTabs", ImGuiTabBarFlags.None)) {
+        if (ImGui.BeginTabBar("##WorkshopSolver_MainWindowTabs", ImGuiTabBarFlags.None)) {
             if (ImGui.BeginTabItem("Gathering")) {
                 DrawGatheringTab();
                 ImGui.EndTabItem();

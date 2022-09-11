@@ -3,7 +3,7 @@ using Dalamud.Plugin;
 using System;
 using System.Collections.Generic;
 
-namespace ReSanctuary;
+namespace WorkshopSolver;
 
 [Serializable]
 public class Configuration : IPluginConfiguration {

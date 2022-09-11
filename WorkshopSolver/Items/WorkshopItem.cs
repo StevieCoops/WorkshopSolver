@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Lumina.Excel;
 using Lumina.Excel.GeneratedSheets;
 
-namespace ReSanctuary;
+namespace WorkshopSolver;
 
 public class WorkshopItem : BaseItem {
     public ushort CraftingTime;
