@@ -1,6 +1,10 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\WorkshopSolver",
+    "\\WorkshopSolver\\Items",
+    "\\WorkshopSolver\\Windows"
   ],
+  "SelectedNode": "\\WorkshopSolver.sln",
   "PreviewInSolutionExplorer": false
 }
